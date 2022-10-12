@@ -1,0 +1,14 @@
+```{r}
+library(readr)
+library(tidyverse)
+library(dplyr)
+library(rio)
+library(reshape2)
+```
+```{r}
+genres = import("genres_v2.csv") %>%
+mutate(duration_s = duration_ms / 1000) 
+df <- subset(genres, select=-c(duration_ms,title,21,song_name,id,uri,track_href,analysis_url,type))
+write.csv(df, file = "songs_tidy.csv",row.names = FALSE)
+```
+
